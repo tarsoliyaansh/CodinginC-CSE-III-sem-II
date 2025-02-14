@@ -1,0 +1,88 @@
+#include <stdio.h>
+# include <stdlib.h>
+struct stack 
+{
+    int element;
+    struct stack *next;
+};
+struct stack *top;
+void push (int);
+int pop();
+void display();
+
+void push(int value)
+{
+    struct stack *ptr;
+    ptr = (struct stack*)malloc(sizeof(struct stack));
+    ptr -> element = value;
+    ptr -> next = top;
+    top = ptr;
+}
+int pop()
+{
+    if(top == NULL){
+        printf("stack is empty\n");
+    }
+    else {
+        int temp = top->element;
+        top = top-> next;
+        return(temp);
+    }
+}
+void display()
+{
+    struct stack *ptr;
+    ptr = top;
+    printf("print element of stack: ");
+    while (ptr != NULL){
+        printf(" %d " ,ptr->element);
+        ptr = ptr->next;
+    }
+}
+
+int main() {
+    int n1,n2,choice;
+    int top = -1;
+    while(1)
+    {
+        printf("\n1.push\n");
+        printf("2.pop\n");
+        printf("3.display\n");
+        printf("4.exit\n");
+            
+        printf("enter your choice: ");
+        scanf("%d" ,&choice);
+            switch(choice)
+            {
+                case 1:{
+                printf("enter the element to be pushed : ");
+                scanf("%d" ,&n1);
+                push(n1);
+                break;
+                }
+            
+            case 2: {
+            n2 = pop();
+            printf("%d is popped : " ,n2);
+            break;
+            }
+            
+            case 3: {
+            display();
+            break;
+            }
+            case 4: {
+            printf("exit program\n");
+            return 0;
+            break;
+            }
+            
+            default:
+                printf("Invalid try again.\n");
+            
+            }
+                
+            }
+            
+    return 0;
+}
